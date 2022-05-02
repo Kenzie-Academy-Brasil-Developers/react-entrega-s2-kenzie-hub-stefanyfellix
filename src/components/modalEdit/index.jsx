@@ -17,7 +17,10 @@ const ModalEdit = ({ closeModal, idObj, loadTechs }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => toast.success("Tecnologia Atualizada"))
+      .then((_) => {
+        closeModal();
+        toast.success("Tecnologia Atualizada");
+      })
       .catch((_) => toast.error("Tente novamente!"));
     loadTechs();
   };
@@ -30,7 +33,10 @@ const ModalEdit = ({ closeModal, idObj, loadTechs }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => toast.success("Tecnologia Deletada"))
+      .then((_) => {
+        closeModal();
+        toast.success("Tecnologia Deletada");
+      })
       .catch((_) => toast.error("Tente novamente!"));
   };
   return (

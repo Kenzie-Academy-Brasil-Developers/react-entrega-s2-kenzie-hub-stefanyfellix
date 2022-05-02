@@ -5,31 +5,35 @@ import { FiEdit3 } from "react-icons/fi";
 
 const List = ({ arr, loadTechs }) => {
   const [isVisibleEditModal, setIsVisibleEditModal] = useState(false);
+  const [idTech, setIdTech] = useState();
   return (
     <ListTechs>
       {arr.map((response) => {
         return (
-          <Techs>
+          <Techs key={response.id}>
             <h3>{response.title}</h3>
             <div>
               <span>{response.status}</span>
               <button
                 className="openEdit"
-                onClick={() => setIsVisibleEditModal(true)}
+                onClick={() => {
+                  setIsVisibleEditModal(true);
+                  setIdTech(response.id);
+                }}
               >
                 <FiEdit3 />
               </button>
-              {isVisibleEditModal ? (
-                <ModalEdit
-                  loadTechs={loadTechs}
-                  idObj={response.id}
-                  closeModal={() => setIsVisibleEditModal(false)}
-                />
-              ) : null}
             </div>
           </Techs>
         );
       })}
+      {isVisibleEditModal ? (
+        <ModalEdit
+          loadTechs={loadTechs}
+          idObj={idTech}
+          closeModal={() => setIsVisibleEditModal(false)}
+        />
+      ) : null}
     </ListTechs>
   );
 };
